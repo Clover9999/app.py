@@ -267,13 +267,14 @@ def alterar_data_vencimento(index):
             if index < len(dados):
                 cliente_info = dados[index].strip().split(";")
                 cliente_info[4] = nova_data_obj.strftime("%d/%m/%Y")  # Atualiza a nova data de vencimento
+                cliente_info[5] = "não pago"  # Atualiza o status para "não pago"
                 dados[index] = ";".join(cliente_info) + "\n"  # Atualiza a linha
 
                 # Salva os dados atualizados no arquivo
                 with open("dados_clientes.txt", "w") as file:
                     file.writelines(dados)
 
-                messagebox.showinfo("Sucesso", "Data de vencimento atualizada com sucesso!")
+                messagebox.showinfo("Sucesso", "Data de vencimento atualizada e status alterado para não pago!")
                 nova_tela.destroy()  # Fecha a janela de alteração
                 abrir_nova_tela()  # Reabre a tela de dados para mostrar as alterações
             else:
@@ -298,6 +299,7 @@ def alterar_data_vencimento(index):
     # Adicionando um botão para fechar a janela
     button_fechar = ctk.CTkButton(nova_tela, text="Fechar", command=nova_tela.destroy)
     button_fechar.pack(pady=5)
+
 
 
 
